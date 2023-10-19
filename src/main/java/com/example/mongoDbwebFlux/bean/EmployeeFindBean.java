@@ -21,9 +21,10 @@ public class EmployeeFindBean {
 
         return employeeRepository.findById(id).map(AppUtils::entityToDto);
     }
+    public Flux<EmployeDto> getEmployeeBetweenRange(String firstId, String lastId){
+        return employeeRepository.findByIdBetween(firstId,lastId).map(AppUtils::entityToDto);
+    }
     public Flux<EmployeDto> getAll() {
-
-
         return employeeRepository.findAll().map(AppUtils::entityToDto);
     }
 }

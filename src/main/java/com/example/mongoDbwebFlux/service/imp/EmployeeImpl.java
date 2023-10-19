@@ -2,6 +2,7 @@ package com.example.mongoDbwebFlux.service.imp;
 
 import com.example.mongoDbwebFlux.bean.EmployeeFindBean;
 import com.example.mongoDbwebFlux.bean.EmployeeSaveBean;
+import com.example.mongoDbwebFlux.bean.EmployeeUpdateBean;
 import com.example.mongoDbwebFlux.dto.EmployeDto;
 import com.example.mongoDbwebFlux.service.EmployeeService;
 
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 public class EmployeeImpl implements EmployeeService {
     private final EmployeeFindBean employeeFindBean;
     private final EmployeeSaveBean employeeSaveBean;
+    private final EmployeeUpdateBean employeeUpdateBean;
 
     @Override
     public Mono<EmployeDto> findById(String id) {
@@ -29,7 +31,19 @@ public class EmployeeImpl implements EmployeeService {
     }
 
     @Override
-    public Mono<EmployeDto> saveProduct(Mono<EmployeDto> employeDtoMono) {
+    public Mono<EmployeDto> saveEmployee(Mono<EmployeDto> employeDtoMono) {
          return  employeeSaveBean.saveEmploye(employeDtoMono);
     }
+
+    @Override
+    public Mono<EmployeDto> updateEmployee(Mono<EmployeDto> employeDtoMono,String id) {
+        return employeeUpdateBean.updateEmployee(employeDtoMono,id);
+    }
+
+    @Override
+    public Flux<EmployeDto> getEmployeeInRange(String firstId, String lastId) {
+        return employeeFindBean.getEmployeeBetweenRange(firstId, lastId);
+    }
+
+
 }
